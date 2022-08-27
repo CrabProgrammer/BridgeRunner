@@ -24,9 +24,9 @@ public class GameManager : MonoBehaviour
     private AudioClip gameOverClip;
     private AudioSource gameOverSound;
 
-    public bool canMoveLeft { get; private set; }
+    public bool canMove { get; private set; }
     public enum GameState { Moving, Building, Reviving, GameOver }
-    public static GameState currentState { get; private set; }
+    public GameState currentState { get; private set; }
 
     void Start()
     {
@@ -50,26 +50,26 @@ public class GameManager : MonoBehaviour
         switch(state)
         {
             case GameState.Moving:
-                canMoveLeft = true; //enable moving left all objects
+                canMove = true; //enable moving left all objects
                 playerController.Run(bridgeBuilder.IsOnGround()); //play animation and check falling
                 currentState = GameState.Moving; 
                 break;
             case GameState.Building:
-                canMoveLeft = false;
+                canMove = false;
                 //build bridge next to player
                 bridgeBuilder.InitPosition(playerController.GetRightBoundPosition());
                 playerController.Stay();
                 currentState = GameState.Building;
                 break;
             case GameState.Reviving:
-                canMoveLeft = true;
+                canMove = true;
                 playerController.Stay();
                 playerController.ResetPosition();
                 currentState = GameState.Reviving;
                 break;
             case GameState.GameOver:
                 gameOverSound.PlayOneShot(gameOverClip);
-                canMoveLeft = false;
+                canMove = false;
                 playerController.Stay();
                 gameOverPanel.SetActive(true);
                 currentState = GameState.GameOver;

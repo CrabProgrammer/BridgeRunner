@@ -22,6 +22,17 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    void Update()
+    {
+        if(gameManager.canMove)
+        {
+            if(transform.position.y < defaultPosition.y)
+            {
+                gameManager.ChangeState(GameManager.GameState.GameOver);
+            }
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Border")) //if collides with border of block(collider)
@@ -40,12 +51,6 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.SetActive(false);
             gameManager.IncreaseScore();
         }
-        else if (collision.gameObject.CompareTag("GameOverArea"))
-        {
-            gameManager.ChangeState(GameManager.GameState.GameOver);
-
-        }
-
     }
     public void ResetPosition()
     {

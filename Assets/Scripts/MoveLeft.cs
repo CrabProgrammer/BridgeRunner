@@ -23,7 +23,7 @@ public class MoveLeft : MonoBehaviour
 
     void Update()
     {
-        if(gameManager.canMoveLeft) //if can move left in current GameState
+        if(gameManager.canMove) //if can move left in current GameState
         {
             transform.Translate(Vector3.left * Time.deltaTime * speed,Space.World);
             if (transform.position.x < -leftBound)
