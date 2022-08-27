@@ -7,6 +7,7 @@ TagManager:
   - DestroyArea
   - Border
   - ScoreZone
+  - GameOverArea
   layers:
   - Default
   - TransparentFX

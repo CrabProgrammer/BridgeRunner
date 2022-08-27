@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         blockGenerator = GetComponent<BlockGenerator>();
         bridgeBuilder = GetComponent<BridgeBuilder>();
-        gameOverSound = GetComponent<AudioSource>();   
+        gameOverSound = GetComponent<AudioSource>();  
         ChangeState(GameState.Moving); //Start game in moving state
     }
 
@@ -68,8 +68,10 @@ public class GameManager : MonoBehaviour
                 currentState = GameState.Reviving;
                 break;
             case GameState.GameOver:
+                gameOverSound.PlayOneShot(gameOverClip);
                 canMoveLeft = false;
                 playerController.Stay();
+                gameOverPanel.SetActive(true);
                 currentState = GameState.GameOver;
                 break;
         }
@@ -91,8 +93,6 @@ public class GameManager : MonoBehaviour
                 }
                 break;  
             case GameState.GameOver:
-                gameOverSound.PlayOneShot(gameOverClip);
-                gameOverPanel.SetActive(true);
                 break;
         }
        
