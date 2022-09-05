@@ -4,6 +4,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(BlockGenerator))]
+[RequireComponent(typeof(BridgeBuilder))]
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     private int score; 
@@ -28,7 +32,7 @@ public class GameManager : MonoBehaviour
     public enum GameState { Moving, Building, Reviving, GameOver }
     public GameState currentState { get; private set; }
 
-    void Start()
+    private void Start()
     {
         score = 0;
         scoreText.text = score.ToString();
@@ -36,7 +40,7 @@ public class GameManager : MonoBehaviour
         blockGenerator = GetComponent<BlockGenerator>();
         bridgeBuilder = GetComponent<BridgeBuilder>();
         gameOverSound = GetComponent<AudioSource>();  
-        ChangeState(GameState.Moving); //Start game in moving state
+        ChangeState(GameState.Moving); 
     }
 
 
@@ -76,7 +80,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-    void Update()
+    private void Update()
     {
         switch(currentState)
         {

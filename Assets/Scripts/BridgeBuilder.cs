@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class BridgeBuilder : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField]
     private GameObject bridgePrefab;
     private GameObject newBridge;
@@ -14,15 +14,15 @@ public class BridgeBuilder : MonoBehaviour
     private AudioSource constructSound;
 
     Vector3 rotationPoint;
-    float stepAngle; //falling step angle by tick
-    float fallingTime;
-    float increasingSpeed;
+    private float stepAngle; //falling step angle by tick
+    private float fallingTime;
+    private float increasingSpeed;
     Vector3 spawnPosition;
     
     enum BridgeState { NotExist, Instantiated, Falling }
     BridgeState bridgeState;
 
-    void Awake()
+    private void Awake()
     {
         constructSound = GetComponent<AudioSource>();
         bridgeState = BridgeState.NotExist;
@@ -68,7 +68,6 @@ public class BridgeBuilder : MonoBehaviour
     {
         switch (bridgeState)
         {
-
             case BridgeState.NotExist:
                 if (Input.touchCount >= 1)
                 {
@@ -111,15 +110,14 @@ public class BridgeBuilder : MonoBehaviour
         newBridge = Instantiate(bridgePrefab);
         newBridge.transform.position = spawnPosition;
         bridgeState = BridgeState.Instantiated;
-        //play construction sound
         constructSound.clip = constructionClip;
         constructSound.Play();
     }
     private void IncreasingBridgeSize()
     {
         //size up
-        newBridge.transform.position += Vector3.up * increasingSpeed * Time.deltaTime / 2.0f; // Move the object in the direction of scaling, so that the corner on ther side stays in place
-        newBridge.transform.localScale += Vector3.up * increasingSpeed * Time.deltaTime; // Scale object in the specified direction
+        newBridge.transform.position += Vector3.up * increasingSpeed * Time.deltaTime / 2.0f;
+        newBridge.transform.localScale += Vector3.up * increasingSpeed * Time.deltaTime; 
     }
     private void StopBuilding()
     {

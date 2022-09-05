@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     private BoxCollider2D playerCollider;
@@ -12,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 defaultPosition;
 
-    void Awake()
+    private void Awake()
     {
         defaultPosition = transform.position; //save start position
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -22,7 +25,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void Update()
+    private void Update()
     {
         if(gameManager.canMove)
         {

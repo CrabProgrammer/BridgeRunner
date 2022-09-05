@@ -15,7 +15,7 @@ public class BlockGenerator : MonoBehaviour
     [SerializeField]
     private GameObject blockPrefab;
 
-    public void Start()
+    private void Start()
     {
         spawnPosition = spawnPositionObject.transform.position;
         InitNewBlock();

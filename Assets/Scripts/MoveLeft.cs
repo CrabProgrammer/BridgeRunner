@@ -11,7 +11,7 @@ public class MoveLeft : MonoBehaviour
 
     [SerializeField]
     private bool isBackground;
-    void Awake()
+    private void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         //speed of background twice slower for parallax effect
@@ -21,7 +21,7 @@ public class MoveLeft : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if(gameManager.canMove) //if can move left in current GameState
         {
